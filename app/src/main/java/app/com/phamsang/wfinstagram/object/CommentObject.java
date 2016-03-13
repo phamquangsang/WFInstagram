@@ -1,4 +1,4 @@
-package app.com.phamsang.wfinstagram;
+package app.com.phamsang.wfinstagram.object;
 
 /**
  * Created by Quang Quang on 3/12/2016.

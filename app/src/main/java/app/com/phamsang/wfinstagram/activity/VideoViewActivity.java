@@ -1,4 +1,4 @@
-package app.com.phamsang.wfinstagram;
+package app.com.phamsang.wfinstagram.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
+import app.com.phamsang.wfinstagram.R;
 
 public class VideoViewActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
     public static final String EXTRA_VIDEO_URL = "video_url";

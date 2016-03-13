@@ -1,26 +1,26 @@
-package app.com.phamsang.wfinstagram;
+package app.com.phamsang.wfinstagram.adapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import app.com.phamsang.wfinstagram.object.InstagItem;
+import app.com.phamsang.wfinstagram.R;
+import app.com.phamsang.wfinstagram.activity.VideoViewActivity;
+import app.com.phamsang.wfinstagram.activity.ViewAllCommentActivity;
 
 /**
  * Created by Quang Quang on 3/11/2016.
@@ -29,6 +29,7 @@ public class InstagramAdapter extends RecyclerView.Adapter<InstagramAdapter.View
     private static final String LOG_TAG = InstagramAdapter.class.getSimpleName();
     private List<InstagItem> mDataSet = new ArrayList<InstagItem>();
     private Context mContext;
+
 
     public InstagramAdapter(Context context) {
         mContext = context;
@@ -49,13 +50,13 @@ public class InstagramAdapter extends RecyclerView.Adapter<InstagramAdapter.View
         holder.mComment.setText(data.getComments());
         holder.mLike.setText(Integer.toString(data.getLikes()));
 
-        long timeStamp = data.getTime()*1000;
+        long timeStamp = data.getTime() * 1000;
         String relativeTime = "";
         relativeTime = DateUtils.getRelativeTimeSpanString(timeStamp, System.currentTimeMillis(), 0L, DateUtils.FORMAT_ABBREV_RELATIVE).toString();
         holder.mTime.setText(relativeTime);
         Glide.with(mContext).load(data.getImageUrl()).placeholder(R.drawable.loading).into(holder.mImage);
         Glide.with(mContext).load(data.getProfileUrl()).into(holder.mProfile);
-        if(data.isVideo()){
+        if (data.isVideo()) {
             holder.mVideoPlay.setVisibility(View.VISIBLE);
             //Toast.makeText(mContext,"video",Toast.LENGTH_SHORT).show();
             holder.mVideoPlay.setOnClickListener(new View.OnClickListener() {
@@ -64,13 +65,13 @@ public class InstagramAdapter extends RecyclerView.Adapter<InstagramAdapter.View
                     VideoViewActivity.showRemoteVideo(mContext, data.getVideoUrl());
                 }
             });
-        }else{
+        } else {
             holder.mVideoPlay.setVisibility(View.GONE);
         }
         holder.mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(data.getUrl()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.getUrl()));
                 mContext.startActivity(intent);
             }
         });
@@ -85,6 +86,15 @@ public class InstagramAdapter extends RecyclerView.Adapter<InstagramAdapter.View
     @Override
     public int getItemCount() {
         return mDataSet.size();
+    }
+
+    public void swapDataSet(List<InstagItem> dataSet) {
+        mDataSet = dataSet;
+        notifyDataSetChanged();
+    }
+
+    public List<InstagItem> getDataSet() {
+        return mDataSet;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -104,22 +114,14 @@ public class InstagramAdapter extends RecyclerView.Adapter<InstagramAdapter.View
             mImage = (ImageView) itemView.findViewById(R.id.imageView);
             mLike = (TextView) itemView.findViewById(R.id.likeTextView);
             mTime = (TextView) itemView.findViewById(R.id.timeTextView);
-            mProfile = (RoundedImageView)itemView.findViewById(R.id.imageViewUserProfile);
-            mUserName = (TextView)itemView.findViewById(R.id.textView_user_name);
-            mCaption = (TextView)itemView.findViewById(R.id.textView_caption);
-            mComment = (TextView)itemView.findViewById(R.id.textViewComment);
-            mVideoPlay = (ImageView)itemView.findViewById(R.id.imageView_video_play);
+            mProfile = (RoundedImageView) itemView.findViewById(R.id.imageViewUserProfile);
+            mUserName = (TextView) itemView.findViewById(R.id.textView_user_name);
+            mCaption = (TextView) itemView.findViewById(R.id.textView_caption);
+            mComment = (TextView) itemView.findViewById(R.id.textViewComment);
+            mVideoPlay = (ImageView) itemView.findViewById(R.id.imageView_video_play);
         }
     }
 
-    public void swapDataSet(List<InstagItem> dataSet){
-        mDataSet = dataSet;
-        notifyDataSetChanged();
-    }
-
-    public List<InstagItem> getDataSet() {
-        return mDataSet;
-    }
 
 
 }

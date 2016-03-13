@@ -3,6 +3,7 @@
           package="app.com.phamsang.wfinstagram">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".InstagramActivity"
+            android:name=".activity.InstagramActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,11 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VideoViewActivity"
+            android:name=".activity.VideoViewActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ViewAllCommentActivity"
-            android:parentActivityName=".InstagramActivity">
+        <activity android:name=".activity.ViewAllCommentActivity"
+            android:parentActivityName=".activity.InstagramActivity">
         </activity>
     </application>
 

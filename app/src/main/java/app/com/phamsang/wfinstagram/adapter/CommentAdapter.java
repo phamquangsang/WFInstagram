@@ -1,7 +1,6 @@
-package app.com.phamsang.wfinstagram;
+package app.com.phamsang.wfinstagram.adapter;
 
 import android.content.Context;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -12,10 +11,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import app.com.phamsang.wfinstagram.object.CommentObject;
+import app.com.phamsang.wfinstagram.R;
 
 /**
  * Created by Quang Quang on 3/12/2016.
@@ -69,7 +69,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
     }
 
-    void swapData(List<CommentObject> dataSet){
+    public void swapData(List<CommentObject> dataSet){
         mDataSet =dataSet;
         notifyDataSetChanged();
     }
